@@ -1,40 +1,56 @@
-'use client';
+"use client";
 import { authClient } from "@/lib/auth-client";
-import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import {
+  Button,
+  Card,
+  Description,
+  FieldError,
+  Form,
+  Input,
+  Label,
+  Separator,
+  TextField,
+} from "@heroui/react";
 import { redirect } from "next/navigation";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+    console.log("Form data:", user);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const user = Object.fromEntries(formData.entries());
-        console.log("Form data:", user);
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+    console.log("Sign up response:", { data, error });
 
-        const {data, error} = await authClient.signIn.email({
-            email: user.email,
-            password: user.password
-        })
-        console.log("Sign up response:", {data, error});
-
-        if(error) {
-            toast.error(error.message);
-        }
-        if(data) {
-            toast.success("Logged in successfully!");
-            redirect('/')
-        }
+    if (error) {
+      toast.error(error.message);
     }
+    if (data) {
+      toast.success("Logged in successfully!");
+      redirect("/");
+    }
+  };
+
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
-    <div className='max-w-7xl mx-auto'>
-        <div className='text-center my-3'>
-            <h1 className="text-2xl font-bold">Login</h1>
-            <p className=''>Start your adventure with Wanderlust</p>
-        </div>
-      <Card className='border rounded-none'>
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center my-3">
+        <h1 className="text-2xl font-bold">Login</h1>
+        <p className="">Start your adventure with Wanderlust</p>
+      </div>
+      <Card className="border rounded-none">
         <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
           <TextField
             isRequired
@@ -77,11 +93,28 @@ const LoginPage = () => {
             <FieldError />
           </TextField>
           <div className="flex justify-center gap-2">
-            <Button className='rounded-none w-full bg-cyan-500 hover:bg-cyan-600' type="submit">
+            <Button
+              className="rounded-none w-full bg-cyan-500 hover:bg-cyan-600"
+              type="submit"
+            >
               Login
             </Button>
           </div>
         </Form>
+        <div className="flex justify-center items-center gap-3">
+          <Separator />
+          <div className="whitespace-nowrap"> Or sign up with </div>
+          <Separator />
+        </div>
+        <div>
+          <Button
+            onClick={handleGoogleSignin}
+            variant="outline"
+            className={"w-full rounded-none"}
+          >
+            <FcGoogle /> Sign in with Google
+          </Button>
+        </div>
       </Card>
     </div>
   );

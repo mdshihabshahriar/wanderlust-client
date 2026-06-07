@@ -1,8 +1,9 @@
 'use client';
 import { authClient } from "@/lib/auth-client";
-import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const SignUpPage = () => {
@@ -29,6 +30,13 @@ const SignUpPage = () => {
             redirect('/')
         }
     }
+
+    const handleGoogleSignin = async() => {
+    await authClient.signIn.social({
+        provider: "google"
+    })
+
+  }
 
   return (
     <div className='max-w-7xl mx-auto'>
@@ -101,6 +109,15 @@ const SignUpPage = () => {
             </Button>
           </div>
         </Form>
+        <div className="flex justify-center items-center gap-3">
+            <Separator/>
+           <div className="whitespace-nowrap"> Or sign up with </div>
+              <Separator/>
+            </div>
+        <div>
+            <Button onClick={handleGoogleSignin} variant="outline" className={'w-full rounded-none'}><FcGoogle /> Sign in with Google</Button>
+        </div>
+
       </Card>
     </div>
   );

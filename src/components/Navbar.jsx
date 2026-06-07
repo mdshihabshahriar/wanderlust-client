@@ -8,6 +8,10 @@ import React from "react";
 const Navbar = () => {
   const { data: session } = authClient.useSession();
 
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  }
+
   const user = session?.user;
   console.log("Navbar session data:", session);
 
@@ -44,13 +48,16 @@ const Navbar = () => {
             <li>
               <Avatar>
                 <Avatar.Image
+                  referrerPolicy="no-referrer"
                   alt="John Doe"
                   src={user?.image}
                 />
                 <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
               </Avatar>
             </li>
-            <li><Button className='rounded-none' variant="danger">Logout</Button></li>
+            <li><Button className='rounded-none' variant="danger" onClick={handleSignOut}>
+              Logout
+            </Button></li>
           </>
         ) : (
           <>
