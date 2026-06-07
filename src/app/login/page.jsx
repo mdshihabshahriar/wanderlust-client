@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
-const SignUpPage = () => {
+const LoginPage = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -13,11 +13,9 @@ const SignUpPage = () => {
         const user = Object.fromEntries(formData.entries());
         console.log("Form data:", user);
 
-        const {data, error} = await authClient.signUp.email({
+        const {data, error} = await authClient.signIn.email({
             email: user.email,
-            password: user.password,
-            name: user.name,
-            image: user.image
+            password: user.password
         })
         console.log("Sign up response:", {data, error});
 
@@ -25,7 +23,7 @@ const SignUpPage = () => {
             toast.error(error.message);
         }
         if(data) {
-            toast.success("Account created successfully!");
+            toast.success("Logged in successfully!");
             redirect('/')
         }
     }
@@ -33,28 +31,11 @@ const SignUpPage = () => {
   return (
     <div className='max-w-7xl mx-auto'>
         <div className='text-center my-3'>
-            <h1 className="text-2xl font-bold">Create Account</h1>
+            <h1 className="text-2xl font-bold">Login</h1>
             <p className=''>Start your adventure with Wanderlust</p>
         </div>
       <Card className='border rounded-none'>
         <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
-          <TextField
-            isRequired
-            name="name"
-            type="text"
-          >
-            <Label>Name</Label>
-            <Input placeholder="John Doe" />
-            <FieldError />
-          </TextField>
-          <TextField
-            name="image"
-            type="url"
-          >
-            <Label>Image URL</Label>
-            <Input placeholder="Image url" />
-            <FieldError />
-          </TextField>
           <TextField
             isRequired
             name="email"
@@ -97,7 +78,7 @@ const SignUpPage = () => {
           </TextField>
           <div className="flex justify-center gap-2">
             <Button className='rounded-none w-full bg-cyan-500 hover:bg-cyan-600' type="submit">
-              Create Account
+              Login
             </Button>
           </div>
         </Form>
@@ -106,4 +87,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default LoginPage;
