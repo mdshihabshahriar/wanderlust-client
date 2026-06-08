@@ -28,7 +28,8 @@ const DestinationDetailsPage = ({ destination }) => {
       price: destination.price,
       imageUrl: destination.imageUrl,
       country: destination.country,
-      bookingDate: new Date(),
+      bookingDate: new Date().toISOString(),
+      departureDate: destination.departureDate,
     };
     console.log("Booking data:", bookingData);
 
@@ -42,13 +43,12 @@ const DestinationDetailsPage = ({ destination }) => {
 
     const data = await res.json();
     console.log("Booking response:", data);
-    
+
     if (res.ok) {
       toast.success("Booking successful!");
     } else {
       toast.error("Booking failed: " + data.message);
     }
-
   };
 
   const {
@@ -99,7 +99,7 @@ const DestinationDetailsPage = ({ destination }) => {
             alt={destinationName}
             width={800}
             height={420}
-            className="w-full h-100 object-cover"
+            className="w-full h-full object-cover"
           />
           <span className="absolute top-3 left-3 bg-emerald-50 text-emerald-800 text-xs font-medium px-3 py-1 rounded-full">
             {category}
@@ -134,11 +134,13 @@ const DestinationDetailsPage = ({ destination }) => {
               { label: "Duration", value: duration },
               {
                 label: "Departure",
-                value: new Date(departureDate).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                }),
+                value: departureDate
+                  ? new Date(departureDate).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  : "Not set",
               },
               { label: "Category", value: category },
               { label: "Availability", value: "Available" },

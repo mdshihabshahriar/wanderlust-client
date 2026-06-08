@@ -1,3 +1,4 @@
+import { BookingCancelAlert } from "@/components/BookingCancelAlert";
 import { StatusBadge } from "@/components/StatusBadge";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -70,9 +71,7 @@ const MyBookingPage = async () => {
               <div className="flex items-center justify-between pt-4 mt-4 border-t border-zinc-100 dark:border-zinc-800">
                 <span className="text-xl font-medium text-emerald-700">${Number(booking.price).toLocaleString()}</span>
                 <div className="flex gap-2">
-                  <button className="flex items-center gap-1.5 text-sm text-red-700 border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
-                    <LuTrash size={13} /> Cancel
-                  </button>
+                  <BookingCancelAlert bookingId={booking._id} />
                   <Link href={`/bookings/${booking._id}`} className="flex items-center gap-1.5 text-sm text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition-colors">
                     <LuEye size={13} /> View
                   </Link>
