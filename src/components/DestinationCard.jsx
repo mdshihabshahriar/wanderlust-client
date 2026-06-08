@@ -45,7 +45,7 @@ const DestinationCard = ({ destination }) => {
           </div>
           <Link href={`/destinations/${_id}`}>
             <button className="flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors cursor-pointer">
-              Book now →
+              See details →
             </button>
           </Link>
         </div>

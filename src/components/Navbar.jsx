@@ -7,12 +7,12 @@ import React from "react";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
+  const user = session?.user;
 
   const handleSignOut = async () => {
     await authClient.signOut();
   }
 
-  const user = session?.user;
   console.log("Navbar session data:", session);
 
   return (
