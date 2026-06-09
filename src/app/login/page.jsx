@@ -45,13 +45,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="text-center my-3">
         <h1 className="text-2xl font-bold">Login</h1>
         <p className="">Start your adventure with Wanderlust</p>
       </div>
-      <Card className="border rounded-none">
-        <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
+      <Card className="border rounded-none max-w-md mx-auto">
+        <Form onSubmit={onSubmit} className="flex flex-col gap-4">
           <TextField
             isRequired
             name="email"
