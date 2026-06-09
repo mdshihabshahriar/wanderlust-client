@@ -1,9 +1,20 @@
 import DestinationDetailsPage from "@/components/DestinationDetailsPage";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const Page = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  });
 
-  const res = await fetch(`http://localhost:6001/destinations/${id}`);
+  console.log("JWT Token in page.jsx:", token);
+
+  const res = await fetch(`http://localhost:6001/destinations/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    }
+  });
   const destination = await res.json();
 
   return <DestinationDetailsPage destination={destination} />;

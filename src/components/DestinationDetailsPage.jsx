@@ -33,10 +33,13 @@ const DestinationDetailsPage = ({ destination }) => {
     };
     console.log("Booking data:", bookingData);
 
+    const {data:tokenData} = await authClient.token();
+
     const res = await fetch("http://localhost:6001/bookings", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(bookingData),
     });
