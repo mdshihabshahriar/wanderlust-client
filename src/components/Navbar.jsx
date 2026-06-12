@@ -4,6 +4,7 @@ import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
@@ -12,12 +13,14 @@ const Navbar = () => {
   const handleSignOut = async () => {
     await authClient.signOut();
     window.location.href = "/login";
+    toast.success('Logout Successful!')
   }
 
   console.log("Navbar session data:", session);
 
   return (
-    <nav className="flex justify-between items-center bg-white p-5">
+    <div className="bg-white py-3">
+      <nav className="flex justify-between items-center max-w-7xl mx-auto">
       <ul className="flex gap-3">
         <li>
           <Link href={"/"}>Home</Link>
@@ -72,6 +75,7 @@ const Navbar = () => {
         )}
       </ul>
     </nav>
+    </div>
   );
 };
 

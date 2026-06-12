@@ -8,7 +8,7 @@ const DestinationCard = ({ destination }) => {
     destination;
 
   return (
-    <div className="w-80 bg-white dark:bg-zinc-900 rounded-[20px] border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm">
+    <div className="bg-white dark:bg-zinc-900 rounded-[20px] border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm">
       {/* Image area */}
       <div className="relative h-[220px] overflow-hidden">
         <Image
