@@ -10,7 +10,7 @@ const Page = async ({ params }) => {
 
   console.log("JWT Token in page.jsx:", token);
 
-  const res = await fetch(`http://localhost:6001/destinations/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destinations/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
     }

@@ -1,6 +1,6 @@
 import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import NavbarWrapper from "@/components/NavbarWrapper";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       className={`${josefinSans.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <NavbarWrapper />
         <main>{children}</main>
         <Footer/>
         <ToastContainer />

@@ -103,7 +103,7 @@ const LoginPage = () => {
         </Form>
         <div className="flex justify-center items-center gap-3">
           <Separator />
-          <div className="whitespace-nowrap"> Or sign up with </div>
+          <div className="whitespace-nowrap"> Or sign in with </div>
           <Separator />
         </div>
         <div>

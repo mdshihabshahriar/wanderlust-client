@@ -44,6 +44,7 @@ const SignUpPage = () => {
             <h1 className="text-2xl font-bold">Create Account</h1>
             <p className=''>Start your adventure with Wanderlust</p>
         </div>
+        <div className='flex justify-center items-center'>
       <Card className='border rounded-none'>
         <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
           <TextField
@@ -119,6 +120,7 @@ const SignUpPage = () => {
         </div>
 
       </Card>
+      </div>
     </div>
   );
 };
